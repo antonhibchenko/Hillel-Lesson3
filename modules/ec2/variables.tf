@@ -1,8 +1,3 @@
-variable "name" {
-  description = "Linux Web Server"
-  type        = string
-}
-
 variable "instance_count" {
   description = "Number of instances to launch"
   type        = number
@@ -15,7 +10,7 @@ variable "ami_id" {
 }
 
 variable "availability_zone" {
-  default = "eu-central-1b"
+  default = "us-east-1b"
   description = "UbuntuServer"
 }
 
@@ -40,7 +35,6 @@ variable "instance_type" {
 variable "aws_key_pair" {
   description = "The key name to use for the instance"
   type        = string
-  default     = ""
 }
 
 variable "subnet_id" {

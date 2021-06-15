@@ -1,9 +1,3 @@
-variable "name" {
-  description = "Linux Web Server"
-  default = "Linux_Web_Server"
-  type        = string
-}
-
 variable "instance_type" {
   description = "t3.micro"
   default     = "t3.micro"
@@ -25,5 +19,16 @@ variable "volume_size" {
 variable "aws_key_pair" {
   description = "The key name to use for the instance"
   type        = string
-  default     = ""
+}
+
+variable "ami_filter" {
+  description = "AMI filter from data"
+  type = bool
+  default = true
+}
+
+variable "ami_id" {
+  description = "AMI filter from data"
+  type = string
+  default = "ami-0502e817a62226e03"
 }

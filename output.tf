@@ -10,3 +10,7 @@ output "instance_pub_ip" {
   value     = module.ec2.public_ip
   sensitive = false
 }
+
+output "numbers_az" {
+  value = module.vpc.numbers_az
+}

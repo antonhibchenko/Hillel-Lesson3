@@ -1,6 +1,6 @@
 //project main file
 provider "aws" {
-  region  = "eu-central-1"
+  region  = "us-east-1"
 }
 
 locals {
@@ -8,6 +8,27 @@ locals {
     Purpose = "Terraform guru :D"
     Project = "Hillel"
   }
+}
+
+data "aws_ami" "hille_arterm_ami" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["*-httpd-hillel"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["650252608304"] # AWS
 }
 
 module "vpc" {
@@ -20,8 +41,8 @@ module "ec2" {
   source = "./modules/ec2"
   vpc_id = module.vpc.vpc_id
   instance_type = var.instance_type
-  name = var.name
-  subnet_id = module.vpc.public_networks[1]
+  ami_id = var.ami_filter ? data.aws_ami.hille_arterm_ami.id : var.ami_id
+  subnet_id = module.vpc.private_networks[1]
   eip_attach = var.eip_attach
   volume_size = var.volume_size
   aws_key_pair = var.aws_key_pair

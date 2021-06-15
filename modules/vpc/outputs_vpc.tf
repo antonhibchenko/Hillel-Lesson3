@@ -9,3 +9,7 @@ output "private_networks" {
 output "vpc_id" {
   value = aws_vpc.this.id
 }
+
+output "numbers_az" {
+  value = local.az_num
+}
